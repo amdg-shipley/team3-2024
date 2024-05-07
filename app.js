@@ -1,9 +1,9 @@
-const express = require('express');
-const path = require('path');
-const app = express();
+var express = require('express'); 
+const path = require('path'); 
+const app = express(); 
+const port = 3000;
 const JSONdb = require('simple-json-db');
 const db = new JSONdb('db.json');
-const port = 3000;
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -12,8 +12,8 @@ app.use(express.urlincluded({ extended: true }));
 app.use(express.json());
 
 app.get('/', (req, res) => {
-  const Missing_work_form = db.get('Missing_work_form') || [];
-  res.render('Demo', { data: Missing_work_form });
+  const Donutform = db.get('Donutform') || [];
+  res.render('Demo', { data: Donutform });
 });
 
 app.post('/Missing_Work', (req, res) => {
@@ -53,7 +53,7 @@ app.get('create', (req, res) => {
 
 });
 
-app.listen(3000, function () {
-    console.log('Example app listening on port 3000!');
-  });
+app.listen(port, () => { 
+  console.log("Server created Successfully") 
+}) 
   
