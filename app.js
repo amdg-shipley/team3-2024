@@ -16,10 +16,10 @@ app.get('/', (req, res) => {
   res.render('Demo', { data: Donutform });
 });
 
-app.post('/Donut', (req, res) => {
-    Donutform.push((Flavor, Topping, Price));
+app.post('/Missing_Work', (req, res) => {
+    Missing_work_form.push((User_name, subject, period, Assesment_name, Quiz_or_test, Date_to_make_up, period_to_make_up));
 
-    db.set('Donutform', Donutform);
+    db.set('Missing_work_form', Missing_work_form);
 
     res.redirect('/')
 
@@ -29,20 +29,20 @@ app.post('/Donut', (req, res) => {
 app.get('/delete/:id', (req,res, next) => {
   const id = req.params.id;
 
-  const Donutform = db.get('Donutform') || [];
-  Donutform.splice(id, 1);
-  db.set(`Donutform`, Donutform); 
+  const Missing_work_form = db.get('Missing_work_form') || [];
+  Missing_work_form.splice(id, 1);
+  db.set(`Missing_work_form`, Missing_work_form); 
 
-  res.redirect('/create');
+  res.redirect('/');
 
 });
 
 app.get('/edit/:id', (req, res) => {
   const id = req.params.id;
 
-  const Donutform = db.get('Donutform') || [];
-  Donutform.splice(id, 1);
-  db.set(`Donutform`, Donutform); 
+  const Missing_work_form = db.get('Missing_work_form') || [];
+  Missing_work_form.splice(id, 1);
+  db.set(`Missing_work_form`, Missing_work_form); 
 
   res.redirect('/edit');
 
