@@ -8,12 +8,12 @@ const db = new JSONdb('db.json');
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-app.use(express.urlincoded({ extended: true }));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.get('/', (req, res) => {
-  const Missing_work_form = db.get('Missing_work_form)') || [];
-  res.render('Demo', { data: Missing_work_form})
+  const Donutform = db.get('Donutform') || [];
+  res.render('Demo', { data: Donutform });
 });
 
 app.post('/Missing_Work', (req, res) => {
