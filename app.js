@@ -12,8 +12,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.get('/', (req, res) => {
-  const Donutform = db.get('Donutform') || [];
-  res.render('Demo', { data: Donutform });
+  const Missing_work_form = db.get('Missing_work_form') || [];
+  res.render('Demo', { data: Missing_work_form });
 });
 
 app.post('/Missing_Work', (req, res) => {
