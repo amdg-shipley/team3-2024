@@ -13,7 +13,7 @@ app.use(express.json());
 
 app.get('/', (req, res) => {
   const Missing_work_form = db.get('Missing_work_form') || [];
-  res.render('Demo', { data: Missing_work_form });
+  res.render('Home', { data: Missing_work_form });
 });
 
 app.post('/Missing_Work', (req, res) => {
