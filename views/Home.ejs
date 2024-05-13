@@ -44,10 +44,14 @@
             <tbody id="carsTable">
              <%for(var i=0; i < data.length; i++){%>
                 <tr>
-                    <th scope="row"><%=i+1%></th>
-                    <td><%= data[i].flavor %></td>
-                    <td><%= data[i].size %></td>
-                    <td><%= data[i].price %></td>
+                  <th scope="row"><%=i+1%></th>
+                  <td><%= data[i].Name %></td>
+                  <td><%= data[i].Subject %></td>
+                  <td><%= data[i].Section %></td>
+                  <td><%= data[i].Assessment %></td>
+                  <td><%= data[i].Quiz_or_Test %></td>
+                  <td><%= data[i].Date_to_Make_up %></td>
+                  <td><%= data[i].Period_to_Make_up %></td>
                     <td><a href="/delete/<%= i %>" class="btn btn-danger">Delete</a></td>
                     <td><a href="/update/<%= i %>" class="btn btn-warning">Update</a></td>
                 </tr>
