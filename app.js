@@ -5,8 +5,6 @@ const port = 8000;
 const JSONdb = require('simple-json-db');
 const db = new JSONdb('db.json');
 
-
-app.use(favicon(path.join(__dirname, '/images','favicon.ico')))
   
 // View Engine Setup 
 app.set('views', path.join(__dirname, 'views')) 
