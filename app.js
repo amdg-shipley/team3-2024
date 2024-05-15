@@ -14,10 +14,10 @@ app.use(express.urlencoded({ extended: true}));
 app.use(express.json());
 
 app.get("/", (req, res)=>{
-    const drinkList= db.get('drinkList') || [];
+    const Make_up_form= db.get('Make_up_form') || [];
 
     res.render('Demo',{
-        data:drinkList
+        data:Make_up_form
     })
 
 });
@@ -27,11 +27,11 @@ app.get('/Add', function(req, res){
 
 });
 
-app.post('/drink', function(req, res){ 
-      const {flavor, size,price}=req.body;
+app.post('/form', function(req, res){ 
+      const {name, subject,section, assessment_name, quiz_or_test, Date_to_Make_up, Period_to_make_up}=req.body;
     const carList= db.get('drinkList') || [];
-    carList.push({flavor,size,price});
-    db.set('drinkList', carList)
+    carList.push({name, subject,section, assessment_name, quiz_or_test, Date_to_Make_up, Period_to_make_up});
+    db.set('Make_up_form', Make_up_form)
     res.redirect('/Add');
 
         
