@@ -16,7 +16,7 @@ app.use(express.json());
 app.get("/", (req, res)=>{
     const Make_up_form= db.get('Make_up_form') || [];
 
-    res.render('Demo',{
+    res.render('Home',{
         data:Make_up_form
     })
 
@@ -29,7 +29,7 @@ app.get('/Add', function(req, res){
 
 app.post('/form', function(req, res){ 
       const {name, subject,section, assessment_name, quiz_or_test, Date_to_Make_up, Period_to_make_up}=req.body;
-    const carList= db.get('drinkList') || [];
+    const Make_up_form= db.get('Make_up_form') || [];
     carList.push({name, subject,section, assessment_name, quiz_or_test, Date_to_Make_up, Period_to_make_up});
     db.set('Make_up_form', Make_up_form)
     res.redirect('/Add');
@@ -39,9 +39,9 @@ app.post('/form', function(req, res){
     app.get('/delete/:id', (req,res, next) => {
 
         const id = req.params.id;
-        const drinkList =db.get('drinkList') || [];
+        const Make_up_form =db.get('Make_up_form') || [];
         drinkList.splice(id,1);
-        db.set("drinkList", drinkList);
+        db.set("Make_up_form", Make_up_form);
 
         res.redirect('/');
 
@@ -49,24 +49,25 @@ app.post('/form', function(req, res){
     app.get('/update/:id', (req,res, next) => {
 
         const id = req.params.id;
-        const drinkList =db.get('drinkList') || [];
-        const drink= drinkList[id];
+        const Make_up_form=db.get('Make_up_form') || [];
+        const form= Make_up_form[id];
 
 
         res.render('Update',{
             id,
-            drink
+            form,
+            
         });
 
     });
 
     app.post('/edit/:id', (req,res)=>{
         const id = req.params.id;
-        const {flavor,size,price}=req.body;
+        const {name, subject,section, assessment_name, quiz_or_test, Date_to_Make_up, Period_to_make_up}=req.body;
 
-        const drinkList =db.get('drinkList') || [];
-        drinkList[id]= {flavor,size,price};
-        db.set('drinkList', drinkList);
+        const Make_up_form =db.get('Make_up_form') || [];
+        Make_up_form[id]= {name, subject,section, assessment_name, quiz_or_test, Date_to_Make_up, Period_to_make_up};
+        db.set('Make_up_form', Make_up_form);
        
         res.redirect('/update/'+id);
 
@@ -77,7 +78,7 @@ app.post('/form', function(req, res){
 
 
   
-app.listen(3000, function(error){ 
+app.listen(8000, function(error){ 
     if(error) throw error 
     console.log("Server created Successfully") 
 }); 
