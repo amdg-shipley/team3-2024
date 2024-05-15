@@ -5,55 +5,81 @@ const port = 8000;
 const JSONdb = require('simple-json-db');
 const db = new JSONdb('db.json');
 
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
 
-app.use(express.urlencoded({ extended: true }));
+app.use(favicon(path.join(__dirname, '/images','favicon.ico')))
+  
+// View Engine Setup 
+app.set('views', path.join(__dirname, 'views')) 
+app.set('view engine', 'ejs') 
+
+app.use(express.urlencoded({ extended: true}));
 app.use(express.json());
 
-app.get('/', (req, res) => {
-  const Missing_work_form = db.get('Missing_work_form') || [];
-  res.render('Home', { data: Missing_work_form });
-});
+app.get("/", (req, res)=>{
+    const drinkList= db.get('drinkList') || [];
 
-app.post('/Missing_Work', (req, res) => {
-    Missing_work_form.push((User_name, subject, period, Assesment_name, Quiz_or_test, Date_to_make_up, period_to_make_up));
-
-    db.set('Missing_work_form', Missing_work_form);
-
-    res.redirect('/')
+    res.render('Demo',{
+        data:drinkList
+    })
 
 });
 
-
-app.get('/delete/:id', (req,res, next) => {
-  const id = req.params.id;
-
-  const Missing_work_form = db.get('Missing_work_form') || [];
-  Missing_work_form.splice(id, 1);
-  db.set(`Missing_work_form`, Missing_work_form); 
-
-  res.redirect('/');
+app.get('/Add', function(req, res){ 
+    res.render('Add');
 
 });
 
-app.get('/edit/:id', (req, res) => {
-  const id = req.params.id;
+app.post('/drink', function(req, res){ 
+      const {flavor, size,price}=req.body;
+    const carList= db.get('drinkList') || [];
+    carList.push({flavor,size,price});
+    db.set('drinkList', carList)
+    res.redirect('/Add');
 
-  const Missing_work_form = db.get('Missing_work_form') || [];
-  Missing_work_form.splice(id, 1);
-  db.set(`Missing_work_form`, Missing_work_form); 
+        
+    });
+    app.get('/delete/:id', (req,res, next) => {
 
-  res.redirect('/edit');
+        const id = req.params.id;
+        const drinkList =db.get('drinkList') || [];
+        drinkList.splice(id,1);
+        db.set("drinkList", drinkList);
 
-});
+        res.redirect('/');
 
-app.get('create', (req, res) => {
-  res.render('/home');
+    });
+    app.get('/update/:id', (req,res, next) => {
 
-});
+        const id = req.params.id;
+        const drinkList =db.get('drinkList') || [];
+        const drink= drinkList[id];
 
-app.listen(port, () => { 
-  console.log("Server created Successfully") 
-}) 
+
+        res.render('Update',{
+            id,
+            drink
+        });
+
+    });
+
+    app.post('/edit/:id', (req,res)=>{
+        const id = req.params.id;
+        const {flavor,size,price}=req.body;
+
+        const drinkList =db.get('drinkList') || [];
+        drinkList[id]= {flavor,size,price};
+        db.set('drinkList', drinkList);
+       
+        res.redirect('/update/'+id);
+
+    })
+    // Rendering our web page i.e. Demo.ejs 
+    // and passing title variable through it 
+
+
+
   
+app.listen(3000, function(error){ 
+    if(error) throw error 
+    console.log("Server created Successfully") 
+}); 

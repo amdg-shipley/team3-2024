@@ -39,13 +39,13 @@
               <span class="input-group-text">Assessment name:</span>
               <input class="form-control" id="price" name="price" type="number" required />
               <span class="input-group-text">Quiz or Test:</span>
-              <% for ( var i = 0; i < bikes.length; i++ ) { %>
+              <% for ( var i = 0; i < Quiz or Test.length; i++ ) { %>
                       <% var selected = ( ride.bike == bikes[i] ) ? "selected" : ""; %>
                       <option value="<%=bikes[i] %>" <%=selected %>><%=bikes[i] %></option>
               <% } %>
               <span class="input-group-text">Date to make up:</span>
               <input type="date" id="date" name="date" required />
-              <span class="input-group-text">Quiz or Test:</span>
+              <span class="input-group-text">Period to Make up:</span>
               <% for ( var i = 0; i < bikes.length; i++ ) { %>
                       <% var selected = ( ride.bike == bikes[i] ) ? "selected" : ""; %>
                       <option value="<%=bikes[i] %>" <%=selected %>><%=bikes[i] %></option>
